@@ -179,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formAnswers.innerHTML = '';
 
             //Проверка на первый и последний вопрос для скрытия кнопок prev и next
+
             switch (true) {
                 case (numberQuestion >= 0 && numberQuestion <= questions.length - 1):
                     questionTitle.textContent = `${questions[indexQuestion].question}`;
@@ -186,10 +187,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     nextButton.classList.remove('d-none');
                     prevButton.classList.remove('d-none');
                     sendButton.classList.add('d-none');
-                    break;
-
-                case (numberQuestion === 0):
-                    prevButton.classList.add('d-none');
+                    if (numberQuestion === 0) {
+                        prevButton.classList.add('d-none');
+                    }
                     break;
 
                 case (numberQuestion === questions.length):
@@ -206,6 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 case (numberQuestion === questions.length + 1):
                     formAnswers.textContent = 'Спасибо за пройденный тест!';
+                    sendButton.classList.add('d-none');
                     setTimeout(() => {
                         modalBlock.classList.remove('d-block');
                     }, 2000);
