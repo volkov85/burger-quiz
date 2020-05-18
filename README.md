@@ -6,6 +6,7 @@
 * requestAnimationFrame and Switch/case operator
 * Циклы и условия / Cycles and conditions
 * Объекты и массивы данных / Objects and Datasets
+* Работа с Firebase / Working with Firebase
 
 ## Сборка на GitHub Pages / Build on GitHub Pages
 https://volkov85.github.io/burger-quiz/
