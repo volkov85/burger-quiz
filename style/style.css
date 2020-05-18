@@ -17,11 +17,13 @@ li {
 
 .answers-item label:hover {
     border: 2px solid #d32f2f;
+    background-color: #f44336;
 }
 
 input:checked+label {
     border: 2px solid #d32f2f;
-    color: #d32f2f;
+    background-color: #f44336;
+    color: white;
 }
 
 label span {
@@ -118,4 +120,36 @@ label span {
 
 .burger.active span:nth-child(3) {
     transform: rotate(-45deg) translate(4px, -9px);
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #f44336;
+    border-color: #f44336;
+}
+
+.btn-secondary.focus,
+.btn-secondary:focus {
+    color: #fff;
+    background-color: #d32f2f;
+    border-color: #d32f2f;
+    box-shadow: none;
+}
+
+.btn-secondary:hover {
+    color: #fff;
+    background-color: #d32f2f;
+    border-color: #d32f2f;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #d32f2f;
+    border-color: #d32f2f;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #f44336;
+    border-color: #f44336;
 }
