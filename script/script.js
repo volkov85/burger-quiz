@@ -11,13 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevButton = document.getElementById('prev');
     const modalDialog = document.querySelector('.modal-dialog');
     const sendButton = document.getElementById('send');
+    const modalTitle = document.querySelector('.modal-title');
 
     //Массив данных
-    const questions = [
-        {
+    const questions = [{
             question: "Какого цвета бургер?",
-            answers: [
-                {
+            answers: [{
                     title: 'Стандарт',
                     url: './image/burger.png'
                 },
@@ -30,8 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             question: "Из какого мяса котлета?",
-            answers: [
-                {
+            answers: [{
                     title: 'Курица',
                     url: './image/chickenMeat.png'
                 },
@@ -48,8 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             question: "Дополнительные ингредиенты?",
-            answers: [
-                {
+            answers: [{
                     title: 'Помидор',
                     url: './image/tomato.png'
                 },
@@ -70,8 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             question: "Добавить соус?",
-            answers: [
-                {
+            answers: [{
                     title: 'Чесночный',
                     url: './image/sauce1.png'
                 },
@@ -125,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //Обработчики событий открытия/закртытия модального окна
     burgerBtn.addEventListener('click', () => {
         burgerBtn.classList.add('active');
+        requestAnimationFrame(animateModal);
         modalBlock.classList.add('d-block');
         playTest();
     });
@@ -146,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             !event.target.closest('.modal-dialog') &&
             !event.target.closest('.openModalButton') &&
             !event.target.closest('.burger')
-        )   {
+        ) {
             modalBlock.classList.remove('d-block');
             burgerBtn.classList.remove('active');
         }
@@ -154,9 +151,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Функция вывода вопросов для теста
     const playTest = () => {
-
         const finalAnswers = [];
+        const obj = {};
+
         let numberQuestion = 0;
+        modalTitle.textContent = 'Ответь на вопрос';
 
         //Функция рендеринга ответов
         const renderAnswers = (index) => {
@@ -179,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
             formAnswers.innerHTML = '';
 
             //Проверка на первый и последний вопрос для скрытия кнопок prev и next
-
             switch (true) {
                 case (numberQuestion >= 0 && numberQuestion <= questions.length - 1):
                     questionTitle.textContent = `${questions[indexQuestion].question}`;
@@ -193,22 +191,34 @@ document.addEventListener('DOMContentLoaded', () => {
                     break;
 
                 case (numberQuestion === questions.length):
+                    questionTitle.textContent = '';
+                    modalTitle.textContent = '';
                     nextButton.classList.add('d-none');
                     prevButton.classList.add('d-none');
                     sendButton.classList.remove('d-none');
                     formAnswers.innerHTML = `
                     <div class="form-group">
-                        <label for="numberPhone">Enter your phone number</label>
+                        <label for="numberPhone">Введите номер телефона</label>
                         <input type="phone" class="form-control" id="numberPhone">
                     </div>
                     `;
+                    const numberPhone = document.querySelector('#numberPhone');
+                    numberPhone.addEventListener('input', (event) => {
+                        event.target.value = event.target.value.replace(/[^0-9+-]/, '');
+                    });
                     break;
 
                 case (numberQuestion === questions.length + 1):
                     formAnswers.textContent = 'Спасибо за пройденный тест!';
+                    for (let key in obj) {
+                        let newObj = {};
+                        newObj[key] = obj[key];
+                        finalAnswers.push(newObj);
+                    }
                     sendButton.classList.add('d-none');
                     setTimeout(() => {
                         modalBlock.classList.remove('d-block');
+                        burgerBtn.classList.remove('active');
                     }, 2000);
                     break;
             }
@@ -218,7 +228,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderQuestions(numberQuestion);
 
         const checkAnswer = () => {
-            const obj = {};
             const inputs = [...formAnswers.elements].filter((input) => input.checked || input.id === 'numberPhone');
 
             inputs.forEach((input, index) => {
@@ -230,8 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     obj['Номер телефона'] = input.value;
                 }
             })
-
-            finalAnswers.push(obj);
         }
 
         //Обработчик событий кнопок prev и next
