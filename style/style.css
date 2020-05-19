@@ -153,3 +153,7 @@ label span {
     background-color: #f44336;
     border-color: #f44336;
 }
+
+.modal-footer {
+    height: 71px;
+}

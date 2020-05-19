@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Функция получения данных
     const getData = () => {
-        formAnswers.textContent = 'ЗАГРУЗКА';
+        formAnswers.innerHTML = `<img src="../image/spinner.svg"/>`;
 
         nextButton.classList.add('d-none');
         prevButton.classList.add('d-none');
