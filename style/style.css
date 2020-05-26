@@ -50,6 +50,7 @@ label span {
 .main-title,
 .arrow {
     color: #f44336;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .content {
@@ -156,4 +157,57 @@ label span {
 
 .modal-footer {
     height: 71px;
+}
+
+.conatainer-faq {
+    width: 80%;
+    max-width: 650px;
+    margin: 50px auto;
+}
+
+button.accordion {
+    width: 100%;
+    background-color: whitesmoke;
+    border: none;
+    outline: none;
+    text-align: left;
+    padding: 15px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.2s linear;
+    display: flex;
+    justify-content: space-between;
+}
+
+button.accordion:hover {
+    background-color: #ddd;
+}
+
+button.accordion::after {
+    content: "+";
+}
+
+button.accordion.is-open::after {
+    content: "-";
+}
+
+button.accordion.is-open {
+    background-color: #f44336;
+}
+
+button.accordion.is-open+.accordion-content {
+    border-bottom: 1px solid #f44336;
+}
+
+.accordion-content {
+    padding: 0 20px;
+    border-left: 1px solid #f44336;
+    border-right: 1px solid #f44336;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-in-out;
+}
+
+.accordion-content p {
+    padding-top: 16px;
 }
